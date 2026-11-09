@@ -21,7 +21,7 @@ Dùng **4 Lenses** quét qua vận hành của các công ty thành viên Vingro
 
 | # | Subsidiary | Lens | Mô tả ngắn bài toán |
 |---|------------|------|---------------------|
-| 1 | **Xanh SM** | Lặp lại | Đối soát và phân bổ lại cuốc xe khi khách hàng đặt qua tổng đài yêu cầu đổi điểm đón/trả giữa chừng vào giờ cao điểm. |
+| 1 | **Xanh SM** | Lặp lại | Tài xế cố tình lách quy trình giao đồ ăn (chỉ nháy máy/nhắn qua app rồi tự ý hủy hoặc chiếm đoạt đơn), dẫn đến thất thoát đơn hàng và khiếu nại nghiêm trọng từ khách.|
 | 2 | **Xanh SM** | Tốn thời gian | Điều phối viên xử lý thủ công các yêu cầu hỗ trợ khẩn cấp từ tài xế về sự cố cạn pin thực địa, tra cứu trụ sạc trống và điều xe cứu hộ pin (mất 12–15 phút/lượt). |
 | 3 | **VinFast** | Lặp lại | Thẩm định log lỗi trạm sạc và đối chiếu hóa đơn sạc điện để xử lý yêu cầu hoàn tiền cho chủ xe hằng ngày. |
 | 4 | **Vinhomes** | AI-upgrade | Phân loại mức độ khẩn cấp và điều phối tự động các phản ánh kỹ thuật (điện, nước, thang máy) kèm hình ảnh của cư dân trên App Vinhomes Resident (hiện CSKH phản hồi mẫu rập khuôn, mất 8–12 tiếng). |
@@ -32,36 +32,56 @@ Dùng **4 Lenses** quét qua vận hành của các công ty thành viên Vingro
 
 # 🃏 Phase 2 — QUICK-ASSESS: 3 Quick Problem Cards (Cá nhân)
 
-Chọn top 3 từ danh sách SCAN: **#2 (Xanh SM Sự cố sạc pin), #4 (Vinhomes Phản ánh kỹ thuật), #5 (Vinmec Bảo lãnh viện phí).**
+Chọn top 3 từ danh sách SCAN: **#1 (Gian lận đơn hàng), #4 (Vinhomes Phản ánh kỹ thuật), #5 (Vinmec Bảo lãnh viện phí).**
 
-## Thẻ bài toán tiêu biểu 1: Card #2 — Xanh SM Xử lý sự cố sạc pin thực địa
+## Thẻ bài toán tiêu biểu 1: Card #1 — Chống gian lận chiếm đoạt đơn hàng do cố tình không liên lạc khách
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
-│ QUICK PROBLEM CARD #2                                       │
+│ QUICK PROBLEM CARD #01 (Delivery Fraud & Misdelivery)       │
 │                                                             │
-│ Bài toán: Tài xế Xanh SM báo cáo sự cố cạn pin / hết pin    │
-│ giữa đường cần điều phối xe sạc lưu động hoặc trạm gần nhất.│
-│ Công ty thành viên: [x] Xanh SM (GSM)                       │
+│ Bài toán (1 câu): Tài xế cố tình lách quy trình giao đồ ăn  │
+│ bằng cách chỉ gọi/nhắn qua app rồi tự ý hủy/chiếm đoạt đơn, │
+│ gây mất đơn hàng và bức xúc tột cùng cho khách hàng.        │
+│ Công ty thành viên: [ ] VinFast  [X] Xanh SM  [ ] Vinhomes  │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)________  │
 │                                                             │
-│ Ai đang đau? Tài xế (lo lắng, chờ đợi), Điều phối (quá tải) │
+│ Ai đang đau (Actor)?                                        │
+│   • Khách hàng: Bị đói, mất bữa ăn, chờ cả tiếng mới biết   │
+│     đơn bị hủy, cảm giác bị lừa đảo.                        │
+│   • Đội ngũ CSKH/Ops: Quá tải giải quyết ticket khiếu nại,  │
+│     phải bù tiền đền đơn hoặc voucher cho khách.            │
+│   • Uy tín dịch vụ Xanh SM: Tụt giảm tỷ lệ giữ chân khách.  │
 │                                                             │
-│ Workflow thủ công hiện tại (5 bước):                        │
-│   1. Tài xế gọi/nhắn tổng đài điều vận báo sắp hết pin      │
-│   → 2. Điều phối viên tra cứu thủ công tọa độ GPS của xe    │
-│   → 3. Tra cứu thủ công các trạm sạc VinFast còn trụ trống  │
-│   → 4. Soạn tin nhắn chỉ dẫn lộ trình gửi qua App tài xế    │
-│   → 5. Tạo lệnh điều xe sạc cứu hộ lưu động nếu pin < 5%    │
+│ Workflow thủ công hiện tại (3-5 bước):                      │
+│   1. Tài xế đến điểm giao, chỉ nhắn tin/nháy máy qua app ──> │
+│   2. Chờ 5-10 phút (khách không bật thông báo app) ──>      │
+│   3. Tài xế bấm "Khách không nghe máy" / "Đã hoàn thành" ──>│
+│   4. Khách mở app kiểm tra thấy đơn đã xong dù chưa nhận ──> │
+│   5. Khách gọi hotline khiếu nại ──> CSKH đối soát thủ công │
+│      log cuộc gọi/GPS để xác minh và xử lý bồi thường.       │
 │                                                             │
-│ Bước nào tốn nhất? Bước 3-4 (⏱ 10-12 phút/lượt)             │
-│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 3, 4 & 5         │
-│ (Tự động kiểm tra ngưỡng pin <5% -> Tra trạm -> Draft lệnh) │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 5: Tiếp nhận khiếu nại│
+│ và đối soát điều tra gian lận (⏱ 15 - 30 phút/vụ việc).     │
+│                                                             │
+│ AI có thể nhảy vào hỗ trợ ở bước nào?                        │
+│   • Bước 2 & 3: Giám sát hành vi real-time (Intervention).  │
+│     Nếu phát hiện tài xế chuẩn bị bấm "Không giao được" mà  │
+│     chưa có cuộc gọi GSM thành công ra số điện thoại khách  │
+│     hoặc thời gian dừng xe (dwell time) tại tọa độ giao < 3 │
+│     phút ──> Tự động chặn và kích hoạt gọi tự động (IVR).   │
+│   • Bước 5: Đánh giá xác suất gian lận tự động (Fraud Score)│
+│     dựa trên lịch sử hủy đơn, thời gian dừng, log GPS và chat│
+│     để tự động duyệt hoàn tiền ngay cho khách.              │
 │                                                             │
 │ Đo thành công bằng gì (Metric có số)?                       │
-│ Giảm thời gian xử lý sự cố từ 15 phút ──> dưới 2 phút.      │
+│   "Giảm 60% tỷ lệ khiếu nại đơn đồ ăn không nhận được;      │
+│    Rút ngắn thời gian xử lý khiếu nại từ 24h ──> dưới 3 phút"│
 │                                                             │
-│ Quick Architecture: [x] LLM Feature (Tự động soạn chỉ dẫn)  │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [X] LLM  [ ] Agent │
+│ (Kết hợp Rule chặn cứng ở Client + LLM/ML phân tích log)   │
 └─────────────────────────────────────────────────────────────┘
+
 Thẻ bài toán 2: Card #4 — Vinhomes Phân loại & Điều phối Ticket Kỹ thuật
 Text
 ┌─────────────────────────────────────────────────────────────┐
