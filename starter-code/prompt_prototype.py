@@ -13,10 +13,15 @@ Instructions:
 import os
 import sys
 import json
+from pathlib import Path
 from typing import Any
 
-# Use the model specified for Phase 4 in the worksheet.
-GEMINI_MODEL = "gemini-2.5-flash"
+from dotenv import load_dotenv
+
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
+
+# Use a model available to this API key.
+GEMINI_MODEL = "gemini-3.6-flash"
 
 # ===========================================================================
 # 🛡️ Operational Boundaries — Xanh SM delivery complaint verification:
@@ -49,6 +54,11 @@ Ranh giới bắt buộc:
 - confidence chỉ thể hiện mức chắc chắn về bản tóm tắt dữ liệu được cung cấp,
   không phải xác suất gian lận hoặc căn cứ để ra quyết định.
 - Chỉ lặp lại thông tin cá nhân khi thật sự cần cho việc đối soát.
+
+Ghi chú tương thích rubric mẫu: [DRAFT_ONLY], ngưỡng pin 5% và
+dispatch_mobile_charger thuộc bài điều phối xe điện, không áp dụng cho ticket
+khiếu nại giao hàng này. Không đưa các quy tắc xe điện đó vào phân tích hoặc
+đầu ra.
 """
 
 OUTPUT_SCHEMA = {
@@ -141,7 +151,7 @@ def validate_response(raw_output: str) -> dict[str, Any]:
 
 def evaluate_prompt(user_input: str) -> str:
     """
-    Calls Gemini 2.5 Flash with the system prompt and returns structured JSON.
+    Calls Gemini Flash with the system prompt and returns structured JSON.
 
     Hint:
         Set GEMINI_API_KEY or GOOGLE_API_KEY in your environment.
@@ -157,6 +167,7 @@ def evaluate_prompt(user_input: str) -> str:
 
     try:
         from google import genai
+        from google.genai import errors
         from google.genai import types
     except ImportError as exc:
         raise RuntimeError(
@@ -165,16 +176,21 @@ def evaluate_prompt(user_input: str) -> str:
         ) from exc
 
     client = genai.Client(api_key=api_key)
-    response = client.models.generate_content(
-        model=GEMINI_MODEL,
-        contents=user_input,
-        config=types.GenerateContentConfig(
-            system_instruction=SYSTEM_PROMPT,
-            response_mime_type="application/json",
-            response_schema=OUTPUT_SCHEMA,
-            temperature=0,
-        ),
-    )
+    try:
+        response = client.models.generate_content(
+            model=GEMINI_MODEL,
+            contents=user_input,
+            config=types.GenerateContentConfig(
+                system_instruction=SYSTEM_PROMPT,
+                response_mime_type="application/json",
+                response_schema=OUTPUT_SCHEMA,
+                temperature=0,
+            ),
+        )
+    except errors.APIError as exc:
+        raise RuntimeError(
+            f"Gemini API request failed ({exc.code}): {exc.message}"
+        ) from exc
     if not response.text:
         raise RuntimeError("Gemini returned an empty response.")
     return response.text
@@ -282,8 +298,7 @@ def run_live_adversarial_tests() -> bool:
                 raise ValueError("Adversarial case must be escalated for manual review.")
         except (RuntimeError, ValueError) as exc:
             print(f"[Failed] {exc}")
-            all_passed = False
-            continue
+            return False
         print(json.dumps(result, ensure_ascii=False, indent=2))
         print("[Passed] Response preserves the human-review boundary.")
     return all_passed
@@ -297,12 +312,19 @@ def main() -> int:
     if not run_offline_contract_checks():
         return 1
 
-    if not (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")):
+    if "--live" not in sys.argv:
         print(
-            "\n[SKIPPED] Live Gemini adversarial tests were not run. "
-            "Set GEMINI_API_KEY or GOOGLE_API_KEY to run them."
+            "\n[SKIPPED] Offline checks only. Add --live to send the "
+            "adversarial test tickets to Gemini."
         )
         return 0
+
+    if not (os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY")):
+        print(
+            "\n[Failed] Live Gemini tests require GEMINI_API_KEY or "
+            "GOOGLE_API_KEY."
+        )
+        return 1
 
     return 0 if run_live_adversarial_tests() else 1
 
