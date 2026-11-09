@@ -2,7 +2,7 @@
 
 ## 3.1. Current-State Workflow
 Quy trình tiếp nhận và đối soát khiếu nại gian lận giao đồ ăn hiện tại của đội ngũ CSKH/Ops Xanh SM:
-
+```text
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
 │ Bước 1       │     │ Bước 2       │     │ Bước 3       │     │ Bước 4       │
 │ Tài xế đến   │     │ Chờ 5-10p    │     │ Tài xế bấm   │     │ Khách tra cứu│
@@ -27,7 +27,7 @@ Quy trình tiếp nhận và đối soát khiếu nại gian lận giao đồ ă
                                                                └──────────────┘
 🔴 = Bottlenecks
 ⏱ Tổng thời gian xử lý thủ công: 24 - 44 phút/vụ việc (thời gian khách chờ giải quyết kéo dài đến 24h).
-
+```
 ---
 
 ## 3.2. Problem Statement (6-field) — Vin Smart Future Standard
@@ -47,6 +47,7 @@ Quy trình tiếp nhận và đối soát khiếu nại gian lận giao đồ ă
 
 - **AI Fit:** Kết hợp **Client Rule Engine** (chặn cứng vi phạm quy trình ở thời gian thực) và **LLM / Fraud Analytics Feature** (tổng hợp log phi cấu trúc, đánh giá Fraud Score và soạn sẵn đề xuất bồi thường). Không sử dụng Agent tự trị hoàn toàn nhằm tránh rủi ro tự động phạt nhầm tài xế hoặc từ chối bồi thường sai đối với khách hàng thực sự gặp sự cố.
 - **Quy trình tương lai (Future-State):**
+```text
 
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
 │ Bước 1       │     │ Bước 2       │     │ Bước 3       │     │ Bước 4       │
@@ -63,5 +64,5 @@ Quy trình tiếp nhận và đối soát khiếu nại gian lận giao đồ ă
                                                                (40% - 70%), chuyển
                                                                Ops đối soát tay
                                                                theo quy trình cũ.
-
+```
 ---
