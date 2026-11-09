@@ -11,7 +11,7 @@
 
 Tôi là **Dũng**, AI Engineer tại **Vin Smart Future**. Nhóm chúng tôi được phân công làm việc trực tiếp với Trung tâm Điều hành Vận tải của **Xanh SM (GSM)** nhằm rà soát các điểm nghẽn (bottlenecks) trong vận hành đội xe điện và xây dựng các giải pháp AI tạo sinh (Generative AI) có kiểm soát.
 
-Qua quá trình ngồi cùng ca trực (shadowing) với các điều phối viên (Dispatchers) tại Trung tâm Điều vận Xanh SM vào khung giờ cao điểm (17h00 – 19h30), tôi nhận thấy áp lực xử lý các cuộc gọi/tin nhắn báo cạn pin khẩn cấp là cực kỳ lớn. Việc phải tra cứu chéo giữa nhiều màn hình và gõ tay từng tin nhắn chỉ dẫn vừa làm chậm thời gian giải cứu xe, vừa tiềm ẩn rủi ro điều hướng xe pin yếu đi quá xa gây sập nguồn giữa đường. Bài toán tôi đề xuất và xây dựng bản mẫu (prototype) ngày hôm nay xuất phát từ thực tế vận hành cấp bách đó.
+Trong quá trình ngồi cùng ca trực (shadowing) với các điều phối viên (Dispatchers) tại Trung tâm Điều vận Xanh SM vào khung giờ cao điểm (17h00 – 19h30), tôi nhận thấy áp lực xử lý các cuộc gọi/tin nhắn báo cạn pin khẩn cấp là cực kỳ lớn. Việc phải tra cứu chéo giữa nhiều màn hình và gõ tay từng tin nhắn chỉ dẫn vừa làm chậm thời gian giải cứu xe, vừa tiềm ẩn rủi ro điều hướng xe pin yếu đi quá xa gây sập nguồn giữa đường. Bài toán tôi đề xuất và xây dựng bản mẫu (prototype) ngày hôm nay xuất phát từ thực tế vận hành cấp bách đó.
 
 ---
 
