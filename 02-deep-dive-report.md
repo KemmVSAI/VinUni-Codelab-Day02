@@ -9,7 +9,7 @@ Quy trình tiếp nhận và đối soát khiếu nại gian lận giao đồ ă
 │ điểm giao &  │ ──→ │ không liên lạc│ ──→│ "Khách không │ ──→ │ thấy đơn đã  │
 │ nháy máy app │     │ qua số GSM   │     │ nhận" / Hủy  │     │ giao/bị hủy  │
 │ Ai: Driver   │     │ Ai: Driver   │     │ Ai: Driver   │     │ Ai: Customer │
-│ ⏱ 1 phút     │     │ ⏱ 5-10 phút  │     │ ⏱ 1 phút     │     │ ⏱ 2 phút     │
+│ ⏱ 1 phút     │    │ ⏱ 5-10 phút  │     │ ⏱ 1 phút    │     │ ⏱ 2 phút    │
 │ In: Tọa độ   │     │ In: App chat │     │ In: Nút hủy  │     │ In: App Xanh │
 │ Out: Ping app│     │ Out: Miss-log│     │ Out: Log hủy │     │ Out: Bức xúc │
 └──────────────┘     └──────────────┘     └──────────────┘     └──────────────┘
@@ -21,7 +21,7 @@ Quy trình tiếp nhận và đối soát khiếu nại gian lận giao đồ ă
                                                                │ đối soát log │
                                                                │ điều tra lận │
                                                                │ Ai: CSKH/Ops │
-                                                               │ ⏱ 15-30p 🔴  │
+                                                               │ ⏱ 15-30p 🔴 │
                                                                │ In: Ticket   │
                                                                │ Out: Bồi hoàn│
                                                                └──────────────┘
@@ -51,7 +51,7 @@ Quy trình tiếp nhận và đối soát khiếu nại gian lận giao đồ ă
 
 ┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
 │ Bước 1       │     │ Bước 2       │     │ Bước 3       │     │ Bước 4       │
-│ Tài xế đến   │     │ 🔵 Real-time │     │ Khách báo    │     │ 🟢 CSKH xác  │
+│ Tài xế đến   │     │ 🔵 Real-time │     │ Khách báo    │     │ 🟢 CSKH xác │
 │ điểm & chuẩn │ ──→ │ Rule Check:  │ ──→ │ chưa nhận:   │ ──→ │ nhận (1 click│
 │ bị bấm hủy   │     │ Chặn nếu sai │     │ 🔵 AI tính   │     │ duyệt đền bù │
 │              │     │ GSM/GPS dừng │     │ Fraud Score  │     │ & phạt tx)   │
